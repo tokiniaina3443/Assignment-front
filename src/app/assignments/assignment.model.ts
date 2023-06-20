@@ -3,6 +3,7 @@ export class Assignment {
   id!: number;
   nom!: string;
   dateDeRendu!: Date;
+  dateReelDeRendu?: Date;
   rendu!: boolean;
   auteur?: string;
   matiere?: string;
