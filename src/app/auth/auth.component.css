@@ -1,0 +1,28 @@
+.container {
+  width: 30%;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 63px;
+}
+
+.card {
+  padding-bottom: 20px;
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+}
+
+.mat-mdc-card-header {
+  display: block !important;
+  padding: 0px 0px 0 !important;
+}
+
+.input {
+  width: 100%;
+}
+
+.submit {
+  width: 100%;
+}

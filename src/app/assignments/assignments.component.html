@@ -8,22 +8,7 @@
     Nombre de devoirs par page : {{ limit }}
   </p>
   <br />
-  <!--
-  <div>
-    <button mat-raised-button color="primary" (click)="premierePage()" [disabled]="page === 1">
-      Première
-    </button>
-    <button mat-raised-button color="primary" (click)="pagePrecedente()" [disabled]="!hasPrevPage">
-      Precedente
-    </button>
-    <button mat-raised-button color="primary" (click)="pageSuivante()" [disabled]="!hasNextPage">
-      Suivante
-    </button>
-    <button mat-raised-button color="primary" (click)="dernierePage()" [disabled]="page === totalPages">
-      Dernière
-    </button>
-  </div>
--->
+
   <mat-paginator
     [length]="totalPages"
     (page)="paginator($event)"
