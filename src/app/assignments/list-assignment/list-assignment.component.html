@@ -17,7 +17,9 @@
             <div style="margin-bottom: 0%; width: 350px; height: 300px">
               <mat-card class="example-card">
                 <mat-card-header>
-                  <mat-card-title>{{ item.nom }}</mat-card-title>
+                  <mat-card-title (click)="detail(item.id)">{{
+                    item.nom
+                  }}</mat-card-title>
                   <mat-card-subtitle>{{
                     item.dateDeRendu | date : "dd/MM/yyyy hh:mm:ss"
                   }}</mat-card-subtitle>

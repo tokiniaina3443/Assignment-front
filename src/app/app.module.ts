@@ -65,6 +65,10 @@ const routes: Routes = [
         path: 'rendre/:id',
         component: RendreComponent,
       },
+      {
+        path: 'detail/:id',
+        component: DetailDialogComponent,
+      },
     ],
   },
   { path: 'assignments/:id', component: AssignmentDetailComponent },
@@ -86,7 +90,6 @@ const routes: Routes = [
     EditAssignmentComponent,
     AuthComponent,
     ListAssignmentComponent,
-    DetailDialogComponent,
     RendreComponent,
   ],
   imports: [

@@ -52,13 +52,8 @@ export class ListAssignmentComponent implements OnInit {
     }
   }
 
-  openDialog() {
-    this.dialog.open(DetailDialogComponent, {
-      minWidth: '300px',
-      data: {
-        animal: 'panda',
-      },
-    });
+  detail(id: string) {
+    // this.router.navigate(['/detail', id]);
   }
 
   loadData() {
