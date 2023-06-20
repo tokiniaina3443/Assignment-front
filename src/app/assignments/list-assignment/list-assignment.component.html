@@ -1,21 +1,26 @@
 <h1 style="margin-left: 2%">List</h1>
 <mat-paginator
-  [length]="200"
+  [length]="length"
+  [pageIndex]="page"
+  [pageSize]="pageSize"
   [pageSizeOptions]="[10, 50, 100]"
   aria-label="Select page"
+  (page)="onPageChange($event)"
 >
 </mat-paginator>
 <div>
   <div style="width: 70%; float: left; border-right: 3px solid #dbdbdb">
-    <mat-grid-list cols="2" rowHeight="1:1.2">
+    <mat-grid-list cols="3" rowHeight="1:1">
       <h3 style="padding-left: 9%">Non rendu</h3>
-      <mat-grid-tile *ngFor="let item of todo" (click)="openDialog()">
-        <div style="margin-bottom: 0%">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title>Titre</mat-card-title>
-              <mat-card-subtitle>Date</mat-card-subtitle>
-              <div
+      <ng-container *ngFor="let item of docs">
+        <ng-container *ngIf="item.rendu == false">
+          <mat-grid-tile>
+            <div style="margin-bottom: 0%; width: 350px; height: 300px">
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>{{ item.nom }}</mat-card-title>
+                  <mat-card-subtitle>{{ item.dateDeRendu }}</mat-card-subtitle>
+                  <!-- <div
                 style="
                   border-radius: 30px;
                   width: 55px;
@@ -24,62 +29,40 @@
                   margin-left: 67%;
                   margin-bottom: 1%;
                 "
-              ></div>
-            </mat-card-header>
-            <img
-              mat-card-image
-              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-            />
-            <mat-card-footer style="margin-left: 5%">
-              <mat-card-title>eleve</mat-card-title>
-            </mat-card-footer>
-            <mat-card-actions style="margin-bottom: 3%">
-              <button mat-raised-button color="primary">Edit</button>
-              <button mat-raised-button color="warn" style="margin-left: 2%">
-                Delete
-              </button>
-            </mat-card-actions>
-          </mat-card>
-        </div>
-      </mat-grid-tile>
+              ></div> -->
+                </mat-card-header>
+                <mat-card-footer style="margin-left: 5%">
+                  <mat-card-title>eleve</mat-card-title>
+                </mat-card-footer>
+                <mat-card-actions style="margin-bottom: 3%">
+                  <button mat-raised-button color="primary">Edit</button>
+                  <button
+                    mat-raised-button
+                    color="warn"
+                    style="margin-left: 2%"
+                  >
+                    Delete
+                  </button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </mat-grid-tile>
+        </ng-container></ng-container
+      >
     </mat-grid-list>
   </div>
-  <div style="float: right; width: 29.5%" (click)="openDialog()">
+  <div style="float: right; width: 29.5%">
     <h3 style="margin-left: 2%">Rendu</h3>
-    <mat-card style="border-bottom: 1px solid #dbdbdb">
-      <mat-card-header>
-        <mat-card-title>Titre</mat-card-title>
-        <mat-card-subtitle>eleve</mat-card-subtitle>
-        <mat-card-subtitle>date de rendu</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    <mat-card style="border-bottom: 1px solid #dbdbdb">
-      <mat-card-header (click)="openDialog()">
-        <mat-card-title>Titre</mat-card-title>
-        <mat-card-subtitle>eleve</mat-card-subtitle>
-        <mat-card-subtitle>date de rendu</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    <mat-card style="border-bottom: 1px solid #dbdbdb">
-      <mat-card-header (click)="openDialog()">
-        <mat-card-title>Titre</mat-card-title>
-        <mat-card-subtitle>eleve</mat-card-subtitle>
-        <mat-card-subtitle>date de rendu</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    <mat-card style="border-bottom: 1px solid #dbdbdb">
-      <mat-card-header (click)="openDialog()">
-        <mat-card-title>Titre</mat-card-title>
-        <mat-card-subtitle>eleve</mat-card-subtitle>
-        <mat-card-subtitle>date de rendu</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    <mat-card style="border-bottom: 1px solid #dbdbdb">
-      <mat-card-header (click)="openDialog()">
-        <mat-card-title>Titre</mat-card-title>
-        <mat-card-subtitle>eleve</mat-card-subtitle>
-        <mat-card-subtitle>date de rendu</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
+    <ng-container *ngFor="let item of docs">
+      <ng-container *ngIf="item.rendu == true">
+        <mat-card style="border-bottom: 1px solid #dbdbdb">
+          <mat-card-header>
+            <mat-card-title>{{ item.nom }}</mat-card-title>
+            <mat-card-subtitle>eleve</mat-card-subtitle>
+            <mat-card-subtitle>{{ item.dateDeRendu }}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </ng-container></ng-container
+    >
   </div>
 </div>

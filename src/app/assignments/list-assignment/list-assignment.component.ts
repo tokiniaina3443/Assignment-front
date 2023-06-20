@@ -3,20 +3,31 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
 import { Dialog } from '@angular/cdk/dialog';
+import { AssignmentsService } from 'src/app/shared/assignments.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-list-assignment',
   templateUrl: './list-assignment.component.html',
   styleUrls: ['./list-assignment.component.css'],
 })
-export class ListAssignmentComponent {
-  todo = [1, 2, 3, 4];
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+export class ListAssignmentComponent implements OnInit {
+  page: number = 0;
+  length: number = 0;
+  pageSize: number = 10;
 
-  constructor(private dialog: Dialog) {}
+  docs: any;
+  constructor(
+    private dialog: Dialog,
+    private assignmentService: AssignmentsService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadData();
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -42,5 +53,21 @@ export class ListAssignmentComponent {
         animal: 'panda',
       },
     });
+  }
+
+  loadData() {
+    this.assignmentService
+      .getAssignmentsAvecPagination(this.page, this.pageSize)
+      .subscribe((response) => {
+        console.log(response);
+        this.docs = response.docs;
+        this.length = response.totalDocs;
+      });
+  }
+
+  onPageChange(event: PageEvent) {
+    this.page = event.pageIndex;
+    this.pageSize = this.pageSize;
+    this.loadData();
   }
 }
