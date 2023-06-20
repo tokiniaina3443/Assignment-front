@@ -4,6 +4,7 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 import { Matiere } from '../matiere.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-assignment',
@@ -19,7 +20,7 @@ export class EditAssignmentComponent implements OnInit {
   matiereAssignment = '';
   remarqueAssignment: string = '';
   matieres: Matiere[] = [];
-
+  baseUrl = environment.apiUrl;
   constructor(
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
@@ -32,7 +33,8 @@ export class EditAssignmentComponent implements OnInit {
     this.fetchMatieres();
   }
   fetchMatieres() {
-    this.http.get<Matiere[]>('http://localhost:8010/api/matieres').subscribe( //need to change later maybe
+    this.http.get<Matiere[]>(this.baseUrl + '/matieres').subscribe(
+      //need to change later maybe
       (matieres) => {
         this.matieres = matieres;
       },
@@ -50,10 +52,12 @@ export class EditAssignmentComponent implements OnInit {
       this.assignment = assignment;
       this.nomAssignment = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
-      this.matiereAssignment = (assignment.matiere == null) ? '' : assignment.matiere;
-      this.auteurAssignment = (assignment.auteur == null) ? '' : assignment.auteur;
+      this.matiereAssignment =
+        assignment.matiere == null ? '' : assignment.matiere;
+      this.auteurAssignment =
+        assignment.auteur == null ? '' : assignment.auteur;
       this.noteAssignment = -1;
-      this.remarqueAssignment = ""
+      this.remarqueAssignment = '';
     });
   }
 
@@ -65,12 +69,13 @@ export class EditAssignmentComponent implements OnInit {
     this.assignment.auteur = this.auteurAssignment;
     this.assignment.matiere = this.matiereAssignment;
     this.assignment.note = -1;
-    this.assignment.remarque = "";
+    this.assignment.remarque = '';
 
-    this.assignmentsService.updateAssignment(this.assignment).subscribe((message) => {
-      console.log(message);
-      this.router.navigate(['']);
-    });
+    this.assignmentsService
+      .updateAssignment(this.assignment)
+      .subscribe((message) => {
+        console.log(message);
+        this.router.navigate(['']);
+      });
   }
 }
-

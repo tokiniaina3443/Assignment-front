@@ -4,6 +4,7 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 import { Matiere } from '../matiere.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-assignment',
@@ -19,7 +20,7 @@ export class AddAssignmentComponent {
   noteAssignment: number | 0 = 0;
   remarqueAssignment = '';
   matieres: Matiere[] = [];
-
+  baseUrl = environment.apiUrl;
   constructor(
     private assignmentsService: AssignmentsService,
     private router: Router,
@@ -30,7 +31,8 @@ export class AddAssignmentComponent {
     this.fetchMatieres();
   }
   fetchMatieres() {
-    this.http.get<Matiere[]>('http://localhost:8010/api/matieres').subscribe( //need to change later maybe
+    this.http.get<Matiere[]>(this.baseUrl + '/matieres').subscribe(
+      //need to change later maybe
       (matieres) => {
         this.matieres = matieres;
       },
@@ -53,7 +55,7 @@ export class AddAssignmentComponent {
     assignment.auteur = this.auteurAssignment;
     assignment.matiere = this.matiereAssignment;
     assignment.note = -1;
-    assignment.remarque = "";
+    assignment.remarque = '';
 
     // on utilise le service pour l'ajout
     this.assignmentsService.addAssignment(assignment).subscribe((reponse) => {

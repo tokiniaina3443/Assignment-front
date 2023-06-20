@@ -5,6 +5,7 @@ import { Assignment } from '../assignments/assignment.model';
 import { LoggingService } from './logging.service';
 
 import { bdInitialAssignments } from './data';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -29,13 +30,19 @@ export class AssignmentsService {
       rendu: true,
     },
   ];
-
+  private _baseUrl = environment.apiUrl;
+  public get baseUrl() {
+    return this._baseUrl;
+  }
+  public set baseUrl(value) {
+    this._baseUrl = value;
+  }
   constructor(
     private loggingService: LoggingService,
     private http: HttpClient
   ) {}
 
-  URI = 'http://localhost:8010/api/assignments';
+  URI = this._baseUrl + '/assignments';
   //URI = 'https://marrakechback2023.herokuapp.com/api/assignments';
 
   getAssignments(): Observable<Assignment[]> {
@@ -44,17 +51,18 @@ export class AssignmentsService {
     return this.http.get<Assignment[]>(this.URI);
   }
 
-  getAssignmentsAvecPagination(page:number, limit:number): Observable<any> {
+  getAssignmentsAvecPagination(page: number, limit: number): Observable<any> {
     // renvoie un objet observable
     //return of(this.assignments);
-    return this.http.get<Assignment[]>(this.URI + "?page=" + page + "&limit=" + limit);
+    return this.http.get<Assignment[]>(
+      this.URI + '?page=' + page + '&limit=' + limit
+    );
   }
 
   getAssignment(id: number): Observable<Assignment | undefined> {
     // renvoie un objet observable
     //return of(this.assignments.find(assignment => assignment.id === id));
-    return this.http.get<Assignment>(this.URI + '/' + id)
-    .pipe(
+    return this.http.get<Assignment>(this.URI + '/' + id).pipe(
       map((a) => {
         a.nom;
         return a;
@@ -89,14 +97,18 @@ export class AssignmentsService {
     return this.http.put<Assignment>(this.URI, assignment);
   }
 
-  rendreAssignment(_id: string, note: number, remarque: string): Observable<any> {
+  rendreAssignment(
+    _id: string,
+    note: number,
+    remarque: string
+  ): Observable<any> {
     // rien besoin de faire, pour le moment, on ne fait que modifier
     // rendu à vrai/faux avec la checkbox du composant de detail
     return this.http.put<Assignment>(this.URI, {
       _id,
       note,
       remarque,
-      rendu:true
+      rendu: true,
     });
   }
 
@@ -127,18 +139,17 @@ export class AssignmentsService {
       a.dateDeRendu = new Date(assignmentGenere.dateDeRendu);
       a.rendu = assignmentGenere.rendu;
 
-      this.addAssignment(a)
-      .subscribe((reponse) => {
+      this.addAssignment(a).subscribe((reponse) => {
         console.log(reponse);
       });
     });
   }
 
   peuplerBDAvecForkJoin(): Observable<any> {
-    const appelsVersAddAssignment:any = [];
+    const appelsVersAddAssignment: any = [];
 
     bdInitialAssignments.forEach((a) => {
-      const nouvelAssignment:any = new Assignment();
+      const nouvelAssignment: any = new Assignment();
 
       nouvelAssignment.id = a.id;
       nouvelAssignment.nom = a.nom;
@@ -149,5 +160,4 @@ export class AssignmentsService {
     });
     return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini
   }
-
 }
