@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8010/api/',
+  apiUrl: 'https://api-assignment-grp13-mbds.onrender.com/api',
 };
