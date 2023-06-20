@@ -8,6 +8,9 @@ import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
+import { Assignment } from '../assignment.model';
 
 @Component({
   selector: 'app-list-assignment',
@@ -22,7 +25,10 @@ export class ListAssignmentComponent implements OnInit {
   docs: any;
   constructor(
     private dialog: Dialog,
-    private assignmentService: AssignmentsService
+    private assignmentsService: AssignmentsService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +62,7 @@ export class ListAssignmentComponent implements OnInit {
   }
 
   loadData() {
-    this.assignmentService
+    this.assignmentsService
       .getAssignmentsAvecPagination(this.page, this.pageSize)
       .subscribe((response) => {
         console.log(response);
@@ -69,5 +75,17 @@ export class ListAssignmentComponent implements OnInit {
     this.page = event.pageIndex;
     this.pageSize = this.pageSize;
     this.loadData();
+  }
+
+  onDelete(assignmentId: string) {
+    this.assignmentsService
+      .deleteAssignmentByID(assignmentId)
+      .subscribe((message) => {
+        console.log(message);
+      });
+  }
+
+  isAdmin() {
+    return true;
   }
 }
