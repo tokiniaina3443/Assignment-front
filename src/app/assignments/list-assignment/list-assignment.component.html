@@ -5,32 +5,75 @@
   aria-label="Select page"
 >
 </mat-paginator>
-<mat-grid-list cols="3" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let item of todo">
-    <div style="margin-bottom: 0%">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title>Titre</mat-card-title>
-          <mat-card-subtitle>Date</mat-card-subtitle>
-          <div
-            style="
-              border-radius: 30px;
-              width: 55px;
-              background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-              background-size: cover;
-              margin-left: 67%;
-              margin-bottom: 1%;
-            "
-          ></div>
-        </mat-card-header>
-        <img
-          mat-card-image
-          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-        />
-        <mat-card-footer style="margin-left: 2.5%; margin-bottom: 3%">
-          <mat-card-title>eleve</mat-card-title>
-        </mat-card-footer>
-      </mat-card>
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
+<div>
+  <div style="width: 70%; float: left; border-right: 3px solid #dbdbdb">
+    <mat-grid-list cols="2" rowHeight="1:1">
+      <h3 style="padding-left: 9%">Non rendu</h3>
+      <mat-grid-tile *ngFor="let item of todo" (click)="openDialog()">
+        <div style="margin-bottom: 0%">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>Titre</mat-card-title>
+              <mat-card-subtitle>Date</mat-card-subtitle>
+              <div
+                style="
+                  border-radius: 30px;
+                  width: 55px;
+                  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+                  background-size: cover;
+                  margin-left: 67%;
+                  margin-bottom: 1%;
+                "
+              ></div>
+            </mat-card-header>
+            <img
+              mat-card-image
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            />
+            <mat-card-footer style="margin-left: 2.5%; margin-bottom: 3%">
+              <mat-card-title>eleve</mat-card-title>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div style="float: right; width: 29.5%" (click)="openDialog()">
+    <h3 style="margin-left: 2%">Rendu</h3>
+    <mat-card style="border-bottom: 1px solid #dbdbdb">
+      <mat-card-header>
+        <mat-card-title>Titre</mat-card-title>
+        <mat-card-subtitle>eleve</mat-card-subtitle>
+        <mat-card-subtitle>date de rendu</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card style="border-bottom: 1px solid #dbdbdb">
+      <mat-card-header (click)="openDialog()">
+        <mat-card-title>Titre</mat-card-title>
+        <mat-card-subtitle>eleve</mat-card-subtitle>
+        <mat-card-subtitle>date de rendu</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card style="border-bottom: 1px solid #dbdbdb">
+      <mat-card-header (click)="openDialog()">
+        <mat-card-title>Titre</mat-card-title>
+        <mat-card-subtitle>eleve</mat-card-subtitle>
+        <mat-card-subtitle>date de rendu</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card style="border-bottom: 1px solid #dbdbdb">
+      <mat-card-header (click)="openDialog()">
+        <mat-card-title>Titre</mat-card-title>
+        <mat-card-subtitle>eleve</mat-card-subtitle>
+        <mat-card-subtitle>date de rendu</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card style="border-bottom: 1px solid #dbdbdb">
+      <mat-card-header (click)="openDialog()">
+        <mat-card-title>Titre</mat-card-title>
+        <mat-card-subtitle>eleve</mat-card-subtitle>
+        <mat-card-subtitle>date de rendu</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>

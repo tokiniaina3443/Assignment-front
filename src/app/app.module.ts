@@ -38,6 +38,8 @@ import { CdkMenu, CdkMenuItem } from '@angular/cdk/menu';
 import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { ListAssignmentComponent } from './assignments/list-assignment/list-assignment.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { DetailDialogComponent } from './assignments/list-assignment/detail-dialog/detail-dialog.component';
+import { Dialog, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 
 const routes: Routes = [
   { path: 'login', component: AuthComponent },
@@ -75,6 +77,7 @@ const routes: Routes = [
     EditAssignmentComponent,
     AuthComponent,
     ListAssignmentComponent,
+    DetailDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,6 +107,7 @@ const routes: Routes = [
     CdkDrag,
     CdkDropList,
     MatGridListModule,
+    DialogModule,
     RouterModule.forRoot(routes),
   ],
   providers: [],
