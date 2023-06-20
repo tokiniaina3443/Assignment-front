@@ -4,10 +4,41 @@
 }
 
 .sidenav {
-  padding-left: 2%;
-  padding-right: 2%;
+  /* text-align: center; */
 }
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.menu {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 180px;
+  max-width: 280px;
+  background-color: rgb(255, 255, 255);
+}
+
+.menu-item {
+  text-align: center !important;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+
+  user-select: none;
+  min-width: 64px;
+  line-height: 36px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex: 1;
+}
+
+.menu-item:hover {
+  background-color: rgb(208, 208, 208);
+}
+
+.menu-item:active {
+  background-color: rgb(170, 170, 170);
 }

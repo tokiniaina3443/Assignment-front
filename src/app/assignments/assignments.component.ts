@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
-import { Assignment } from './assignment.model';
 
 @Component({
   selector: 'app-assignments',
@@ -9,6 +8,7 @@ import { Assignment } from './assignment.model';
 })
 export class AssignmentsComponent implements OnInit {
   showFiller: boolean = false;
+  features = ['Hydrodynamic', 'Port & Starboard Attachments', 'Turbo Drive'];
   constructor(private assignmentsService: AssignmentsService) {}
 
   ngOnInit() {}

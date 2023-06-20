@@ -33,12 +33,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { CdkListbox, CdkOption } from '@angular/cdk/listbox';
+import { CdkMenu, CdkMenuItem } from '@angular/cdk/menu';
+import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { ListAssignmentComponent } from './assignments/list-assignment/list-assignment.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const routes: Routes = [
   { path: 'login', component: AuthComponent },
-  { path: '', component: AssignmentsComponent, canActivate: [AuthGuard] },
-  { path: 'home', component: AssignmentsComponent },
-  { path: 'add', component: AddAssignmentComponent },
+  {
+    path: '',
+    component: AssignmentsComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: ListAssignmentComponent,
+      },
+      {
+        path: 'add',
+        component: AddAssignmentComponent,
+      },
+    ],
+  },
   { path: 'assignments/:id', component: AssignmentDetailComponent },
   {
     path: 'assignments/:id/edit',
@@ -57,6 +74,7 @@ const routes: Routes = [
     AddAssignmentComponent,
     EditAssignmentComponent,
     AuthComponent,
+    ListAssignmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +97,13 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSidenavModule,
     MatToolbarModule,
+    CdkListbox,
+    CdkOption,
+    CdkMenu,
+    CdkMenuItem,
+    CdkDrag,
+    CdkDropList,
+    MatGridListModule,
     RouterModule.forRoot(routes),
   ],
   providers: [],

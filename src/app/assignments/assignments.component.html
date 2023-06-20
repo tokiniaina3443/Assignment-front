@@ -1,6 +1,11 @@
 <mat-drawer-container class="container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side">
-    <h2>Assignment application</h2>
+    <h2>Menu</h2>
+    <div class="menu" cdkMenu>
+      <button class="menu-item" routerLink="/" cdkMenuItem>Liste</button>
+      <button class="menu-item" routerLink="/add" cdkMenuItem>Ajouter</button>
+      <button class="menu-item" cdkMenuItem>Generer</button>
+    </div>
   </mat-drawer>
 
   <div class="sidenav-content">
@@ -17,7 +22,7 @@
       <span>Binvenue sur l'application</span>
     </mat-toolbar>
   </div>
-  <div>
-    <p>contenue</p>
+  <div class="content">
+    <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>
