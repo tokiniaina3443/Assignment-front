@@ -8,7 +8,7 @@ import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../assignment.model';
 
@@ -88,5 +88,9 @@ export class ListAssignmentComponent implements OnInit {
 
   isAdmin() {
     return true;
+  }
+
+  edit(id: string) {
+    this.router.navigate(['/edit', id]);
   }
 }

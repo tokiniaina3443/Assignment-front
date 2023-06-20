@@ -56,6 +56,10 @@ const routes: Routes = [
         path: 'add',
         component: AddAssignmentComponent,
       },
+      {
+        path: 'edit/:id',
+        component: EditAssignmentComponent,
+      },
     ],
   },
   { path: 'assignments/:id', component: AssignmentDetailComponent },

@@ -29,8 +29,7 @@ export class EditAssignmentComponent implements OnInit {
     // le "+" force l'id de type string en "number"
     const id = +this.route.snapshot.params['id'];
 
-    this.assignmentsService.getAssignment(id)
-    .subscribe((assignment) => {
+    this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       if (!assignment) return;
 
       this.assignment = assignment;
@@ -45,7 +44,7 @@ export class EditAssignmentComponent implements OnInit {
     // on récupère les valeurs dans le formulaire
     this.assignment.nom = this.nomAssignment;
     this.assignment.dateDeRendu = this.dateDeRendu;
-    
+
     this.assignmentsService
       .updateAssignment(this.assignment)
       .subscribe((message) => {
