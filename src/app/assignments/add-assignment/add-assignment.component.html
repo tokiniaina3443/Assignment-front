@@ -1,15 +1,26 @@
 <form ngForm (submit)="onSubmit(); assignmentForm.reset();" #assignmentForm class="form">
   <mat-form-field>
-    <input type="text" matInput placeholder="nom" [(ngModel)]="nomAssignment" name="nom">
-    <mat-form-field appearance="fill">
-      <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="dateDeRendu" placeholder="Date de rendu">
+    <mat-label>Nom</mat-label>
+    <input type="text" matInput placeholder="Nom" [(ngModel)]="nomAssignment" name="nom">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Date de rendu</mat-label>
+    <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="dateDeRendu" placeholder="Date de rendu">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
 
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker">
-      </mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Auteur</mat-label>
+    <input type="text" matInput placeholder="Auteur" [(ngModel)]="auteurAssignment" name="auteur">
+  </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Matière</mat-label>
+    <select matNativeControl [(ngModel)]="matiereAssignment" name="matiere">
+      <option *ngFor="let matiere of matieres" [value]="matiere._id">{{ matiere.nom }}</option>
+    </select>
   </mat-form-field>
 
   <button mat-stroked-button [disabled]="((!nomAssignment) || (!dateDeRendu))" color="primary">
