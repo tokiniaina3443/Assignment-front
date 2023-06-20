@@ -19,7 +19,7 @@ import { Assignment } from '../assignment.model';
 })
 export class ListAssignmentComponent implements OnInit {
   page: number = 0;
-  length: number = 0;
+  length: number = 1;
   pageSize: number = 10;
 
   docs: any;
