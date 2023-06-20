@@ -1,1 +1,13 @@
-<p>rendre works!</p>
+<div class="container" *ngIf="assignment">
+    <h1>Rendre l'assignment {{ assignment.nom }}</h1>
+    <form ngForm class="form" #formRendre (submit)="onRendreAssignment(); formRendre.reset();">
+      <mat-form-field>
+        <input matInput type="number" placeholder="Note" [(ngModel)]="noteAssignment" name="assignment-note" [value]="0" min="0">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Remarque" [(ngModel)]="remarqueAssignment" name="assignment-remarque" [value]="''"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Rendre</button>
+    </form>
+  </div>
+  
