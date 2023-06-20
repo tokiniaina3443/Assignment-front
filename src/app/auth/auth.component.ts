@@ -18,13 +18,13 @@ export class AuthComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private localStorage: LocalStorageService
+    private localStorageService: LocalStorageService
   ) {}
 
   login() {
     this.authService.Login(this.loginForm.value).subscribe((response) => {
       if (response.token) {
-        this.localStorage.set('token', response.token);
+        this.localStorageService.set('token', response.token);
         this.router.navigate(['']);
       } else {
         alert('Invalid credentials');

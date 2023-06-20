@@ -36,7 +36,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 const routes: Routes = [
   { path: 'login', component: AuthComponent },
-  { path: '', component: AssignmentsComponent },
+  { path: '', component: AssignmentsComponent, canActivate: [AuthGuard] },
   { path: 'home', component: AssignmentsComponent },
   { path: 'add', component: AddAssignmentComponent },
   { path: 'assignments/:id', component: AssignmentDetailComponent },
