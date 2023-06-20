@@ -12,6 +12,12 @@
     <mat-form-field>
       <input matInput type="text" placeholder="Auteur" [(ngModel)]="auteurAssignment" name="assignment-auteur">
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Matière</mat-label>
+      <select matNativeControl [(ngModel)]="matiereAssignment" name="matiere">
+        <option *ngFor="let matiere of matieres" [value]="matiere._id">{{ matiere.nom }}</option>
+      </select>
+    </mat-form-field>
     <button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu))">Sauver</button>
   </form>
 </div>
