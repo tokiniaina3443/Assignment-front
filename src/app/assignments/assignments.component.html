@@ -4,7 +4,9 @@
     <div class="menu" cdkMenu>
       <button class="menu-item" routerLink="/" cdkMenuItem>Liste</button>
       <button class="menu-item" routerLink="/add" cdkMenuItem>Ajouter</button>
-      <button class="menu-item" cdkMenuItem>Generer</button>
+    </div>
+    <div class="bottom-content">
+      <button mat-flat-button (click)="logOut()">Se deconnecter</button>
     </div>
   </mat-drawer>
 
