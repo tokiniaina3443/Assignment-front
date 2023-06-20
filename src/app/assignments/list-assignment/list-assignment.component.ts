@@ -82,6 +82,7 @@ export class ListAssignmentComponent implements OnInit {
       .deleteAssignmentByID(assignmentId)
       .subscribe((message) => {
         console.log(message);
+        this.loadData();
       });
   }
 
