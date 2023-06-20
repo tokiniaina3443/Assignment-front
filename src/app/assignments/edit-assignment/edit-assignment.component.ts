@@ -10,9 +10,11 @@ import { Assignment } from '../assignment.model';
 })
 export class EditAssignmentComponent implements OnInit {
   assignment!: Assignment | undefined;
-  // champs de formulaire
-  nomAssignment!: string;
+  nomAssignment: string = '';
   dateDeRendu!: Date;
+  auteurAssignment: string = '';
+  noteAssignment: number | 0 = 0;
+  remarqueAssignment: string = '';
 
   constructor(
     private assignmentsService: AssignmentsService,
@@ -25,33 +27,33 @@ export class EditAssignmentComponent implements OnInit {
   }
 
   getAssignment() {
-    // on récupère l'id dans le snapshot passé par le routeur
-    // le "+" force l'id de type string en "number"
     const id = +this.route.snapshot.params['id'];
 
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       if (!assignment) return;
 
       this.assignment = assignment;
-      // Pour pré-remplir le formulaire
       this.nomAssignment = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
+      this.auteurAssignment = (assignment.auteur == null) ? '' : assignment.auteur;
+      this.noteAssignment = -1;
+      this.remarqueAssignment = ""
     });
   }
+
   onSaveAssignment() {
     if (!this.assignment) return;
 
-    // on récupère les valeurs dans le formulaire
     this.assignment.nom = this.nomAssignment;
     this.assignment.dateDeRendu = this.dateDeRendu;
+    this.assignment.auteur = this.auteurAssignment;
+    this.assignment.note = -1;
+    this.assignment.remarque = "";
 
-    this.assignmentsService
-      .updateAssignment(this.assignment)
-      .subscribe((message) => {
-        console.log(message);
-
-        // navigation vers la home page
-        this.router.navigate(['/home']);
-      });
+    this.assignmentsService.updateAssignment(this.assignment).subscribe((message) => {
+      console.log(message);
+      this.router.navigate(['']);
+    });
   }
 }
+
