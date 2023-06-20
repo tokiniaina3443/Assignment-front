@@ -89,6 +89,17 @@ export class AssignmentsService {
     return this.http.put<Assignment>(this.URI, assignment);
   }
 
+  rendreAssignment(_id: string, note: number, remarque: string): Observable<any> {
+    // rien besoin de faire, pour le moment, on ne fait que modifier
+    // rendu à vrai/faux avec la checkbox du composant de detail
+    return this.http.put<Assignment>(this.URI, {
+      _id,
+      note,
+      remarque,
+      rendu:true
+    });
+  }
+
   deleteAssignment(assignment: Assignment): Observable<string> {
     /*
     const pos = this.assignments.indexOf(assignment);
@@ -100,7 +111,13 @@ export class AssignmentsService {
 
     //return of("Assignment supprimé !");
   }
+  deleteAssignmentByID(_id: string): Observable<string> {
+    this.loggingService.log(_id, 'supprimé !');
 
+    return this.http.delete<string>(this.URI + '/' + _id);
+
+    //return of("Assignment supprimé !");
+  }
   // version naive
   peuplerBD() {
     bdInitialAssignments.forEach((assignmentGenere) => {

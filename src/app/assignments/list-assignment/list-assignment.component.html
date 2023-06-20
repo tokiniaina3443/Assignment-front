@@ -34,14 +34,15 @@
               <mat-card-title>eleve</mat-card-title>
             </mat-card-footer>
             <mat-card-actions style="margin-bottom: 3%; display: block;">
-              <button mat-raised-button color="primary">Edit</button>
+              <button mat-raised-button color="primary" [disabled]="!isAdmin()">Edit</button>
               <button mat-raised-button color="accent" style="margin-left: 2%">
                 Rendre
               </button>
-              <button mat-raised-button color="warn" style="float: right">
+              <button mat-raised-button color="warn" style="float: right" [disabled]="!isAdmin()" (click)="onDelete('648ed59cbb0fc30d14eca1d8')">
                 Delete
               </button>
             </mat-card-actions>
+            
           </mat-card>
         </div>
       </mat-grid-tile>
