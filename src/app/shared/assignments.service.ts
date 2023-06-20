@@ -56,7 +56,7 @@ export class AssignmentsService {
     return this.http.get<Assignment>(this.URI + '/' + id)
     .pipe(
       map((a) => {
-        a.nom += ' TRANSFORME PAR UN PIPE !';
+        a.nom;
         return a;
       }),
       catchError(

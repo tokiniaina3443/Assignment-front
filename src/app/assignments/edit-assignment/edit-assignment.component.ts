@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
+import { Matiere } from '../matiere.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-assignment',
@@ -10,48 +12,65 @@ import { Assignment } from '../assignment.model';
 })
 export class EditAssignmentComponent implements OnInit {
   assignment!: Assignment | undefined;
-  // champs de formulaire
-  nomAssignment!: string;
+  nomAssignment: string = '';
   dateDeRendu!: Date;
+  auteurAssignment: string = '';
+  noteAssignment: number | 0 = 0;
+  matiereAssignment = '';
+  remarqueAssignment: string = '';
+  matieres: Matiere[] = [];
 
   constructor(
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.getAssignment();
+    this.fetchMatieres();
   }
-
+  fetchMatieres() {
+    this.http.get<Matiere[]>('http://localhost:8010/api/matieres').subscribe( //need to change later maybe
+      (matieres) => {
+        this.matieres = matieres;
+      },
+      (error) => {
+        console.log('Error fetching matieres:', error);
+      }
+    );
+  }
   getAssignment() {
-    // on récupère l'id dans le snapshot passé par le routeur
-    // le "+" force l'id de type string en "number"
     const id = +this.route.snapshot.params['id'];
 
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       if (!assignment) return;
 
       this.assignment = assignment;
-      // Pour pré-remplir le formulaire
       this.nomAssignment = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
+      this.matiereAssignment = (assignment.matiere == null) ? '' : assignment.matiere;
+      this.auteurAssignment = (assignment.auteur == null) ? '' : assignment.auteur;
+      this.noteAssignment = -1;
+      this.remarqueAssignment = ""
     });
   }
+
   onSaveAssignment() {
     if (!this.assignment) return;
 
-    // on récupère les valeurs dans le formulaire
     this.assignment.nom = this.nomAssignment;
     this.assignment.dateDeRendu = this.dateDeRendu;
+    this.assignment.auteur = this.auteurAssignment;
+    this.assignment.matiere = this.matiereAssignment;
+    this.assignment.note = -1;
+    this.assignment.remarque = "";
 
-    this.assignmentsService
-      .updateAssignment(this.assignment)
-      .subscribe((message) => {
-        console.log(message);
-
-        // navigation vers la home page
-        this.router.navigate(['/home']);
-      });
+    this.assignmentsService.updateAssignment(this.assignment).subscribe((message) => {
+      console.log(message);
+      this.router.navigate(['']);
+    });
   }
 }
+

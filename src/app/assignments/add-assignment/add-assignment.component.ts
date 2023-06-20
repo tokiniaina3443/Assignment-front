@@ -61,7 +61,7 @@ export class AddAssignmentComponent {
 
       // on navigue par programmation vers la page d'accueil
       // pour afficher la liste des assignments
-      this.router.navigate(['/home']);
+      this.router.navigate(['']);
     });
   }
 }
