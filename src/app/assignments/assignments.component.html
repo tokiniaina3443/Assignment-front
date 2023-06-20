@@ -1,85 +1,23 @@
-<main class="container">
-  <a routerLink="/add" class="ajouterBtn">
-    <button mat-flat-button color="accent">Ajouter Assignment</button>
-  </a>
-  <p>
-    Nombre de pages : {{ totalPages }}, Page courante : {{ page }}, limit :
-    {{ limit }}. <br />
-    Nombre de devoirs par page : {{ limit }}
-  </p>
-  <br />
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <h2>Assignment application</h2>
+  </mat-drawer>
 
-  <mat-paginator
-    [length]="totalPages"
-    (page)="paginator($event)"
-    [pageSize]="limit"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    [showFirstLastButtons]="true"
-    aria-label="Select page"
-  >
-  </mat-paginator>
-
-  <table mat-table [dataSource]="assignments" class="mat-elevation-z8">
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>Id</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
-
-    <!-- nom Column -->
-    <ng-container matColumnDef="nom">
-      <th mat-header-cell *matHeaderCellDef>Nom</th>
-      <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
-    </ng-container>
-
-    <!-- dateDeRendu Column -->
-    <ng-container matColumnDef="dateDeRendu">
-      <th mat-header-cell *matHeaderCellDef>Date de rendu</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.dateDeRendu | date }}
-      </td>
-    </ng-container>
-
-    <!-- rendu Column -->
-    <ng-container matColumnDef="rendu">
-      <th mat-header-cell *matHeaderCellDef>Rendu</th>
-      <td mat-cell *matCellDef="let element">{{ element.rendu }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-
-  <!--
-  <table>
-    <tr *ngFor="let a of assignments">
-      <td>{{a.nom}}</td>
-      <td>{{a.dateDeRendu | date: 'dd/MM/yyyy'}}</td>
-      <td>{{a.rendu}}</td>
-    </tr>
-  </table>
--->
-
-  <br />
-  <mat-list *ngFor="let a of assignments">
-    <mat-divider></mat-divider>
-
-    <h3 mat-subheader>{{ a.dateDeRendu | date : "dd/MM/yyyy" }}</h3>
-    <nav>
-      <a routerLink="/assignments/{{ a.id }}">
-        <mat-list-item>
-          <p *ngIf="a.rendu; else nonrendu" appRendu>
-            Le devoir {{ a.nom }} est à rendre le : {{ a.dateDeRendu | date }}.
-          </p>
-
-          <ng-template #nonrendu>
-            <p appNonrendu>Le devoir {{ a.nom }} n'a pas été rendu !</p>
-          </ng-template>
-        </mat-list-item>
-      </a>
-    </nav>
-  </mat-list>
-</main>
+  <div class="sidenav-content">
+    <mat-toolbar>
+      <button
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+        (click)="drawer.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="example-spacer"></span>
+      <span>Binvenue sur l'application</span>
+    </mat-toolbar>
+  </div>
+  <div>
+    <p>contenue</p>
+  </div>
+</mat-drawer-container>

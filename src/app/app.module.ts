@@ -17,6 +17,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
@@ -31,6 +32,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const routes: Routes = [
   { path: 'login', component: AuthComponent },
@@ -75,6 +77,8 @@ const routes: Routes = [
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSidenavModule,
+    MatToolbarModule,
     RouterModule.forRoot(routes),
   ],
   providers: [],
