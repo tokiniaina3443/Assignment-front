@@ -19,7 +19,9 @@
               <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>{{ item.nom }}</mat-card-title>
-                  <mat-card-subtitle>{{ item.dateDeRendu }}</mat-card-subtitle>
+                  <mat-card-subtitle>{{
+                    item.dateDeRendu | date : "dd/MM/yyyy hh:mm:ss"
+                  }}</mat-card-subtitle>
                   <!-- <div
                 style="
                   border-radius: 30px;
@@ -74,7 +76,9 @@
           <mat-card-header>
             <mat-card-title>{{ item.nom }}</mat-card-title>
             <mat-card-subtitle>eleve</mat-card-subtitle>
-            <mat-card-subtitle>{{ item.dateDeRendu }}</mat-card-subtitle>
+            <mat-card-subtitle>{{
+              item.dateDeRendu | date : "dd/MM/yyyy hh:mm:ss"
+            }}</mat-card-subtitle>
           </mat-card-header>
         </mat-card>
       </ng-container></ng-container
