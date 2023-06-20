@@ -3,7 +3,6 @@
   [length]="length"
   [pageIndex]="page"
   [pageSize]="pageSize"
-  [pageSizeOptions]="[10, 50, 100]"
   aria-label="Select page"
   (page)="onPageChange($event)"
 >
@@ -34,7 +33,7 @@
               ></div> -->
                 </mat-card-header>
                 <mat-card-footer style="margin-left: 5%">
-                  <mat-card-title>eleve</mat-card-title>
+                  <mat-card-title>{{ item.auteur }}</mat-card-title>
                 </mat-card-footer>
                 <mat-card-actions style="margin-bottom: 3%; display: block">
                   <button
@@ -49,6 +48,7 @@
                     mat-raised-button
                     color="accent"
                     style="margin-left: 2%"
+                    (click)="rendre(item.id)"
                   >
                     Rendre
                   </button>
@@ -76,7 +76,7 @@
         <mat-card style="border-bottom: 1px solid #dbdbdb">
           <mat-card-header>
             <mat-card-title>{{ item.nom }}</mat-card-title>
-            <mat-card-subtitle>eleve</mat-card-subtitle>
+            <mat-card-subtitle>{{ item.auteur }}</mat-card-subtitle>
             <mat-card-subtitle>{{
               item.dateDeRendu | date : "dd/MM/yyyy hh:mm:ss"
             }}</mat-card-subtitle>

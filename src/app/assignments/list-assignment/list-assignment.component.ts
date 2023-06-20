@@ -93,4 +93,8 @@ export class ListAssignmentComponent implements OnInit {
   edit(id: string) {
     this.router.navigate(['/edit', id]);
   }
+
+  rendre(id: string) {
+    this.router.navigate(['/rendre', id]);
+  }
 }

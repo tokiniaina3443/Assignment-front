@@ -40,6 +40,7 @@ import { ListAssignmentComponent } from './assignments/list-assignment/list-assi
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DetailDialogComponent } from './assignments/list-assignment/detail-dialog/detail-dialog.component';
 import { Dialog, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
+import { RendreComponent } from './assignments/list-assignment/rendre/rendre.component';
 
 const routes: Routes = [
   { path: 'login', component: AuthComponent },
@@ -59,6 +60,10 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: EditAssignmentComponent,
+      },
+      {
+        path: 'rendre/:id',
+        component: RendreComponent,
       },
     ],
   },
@@ -82,6 +87,7 @@ const routes: Routes = [
     AuthComponent,
     ListAssignmentComponent,
     DetailDialogComponent,
+    RendreComponent,
   ],
   imports: [
     BrowserModule,
